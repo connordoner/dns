@@ -10,7 +10,7 @@ resource "aws_route53_zone" "gxrneyme" {
 # I do this here as Amazon Route 53 doesn’t support having more than one TXT record at the root of the zone.
 resource "aws_route53_record" "gxrneyme_root_txt" {
   zone_id = aws_route53_zone.gxrneyme.zone_id
-  name    = "@"
+  name    = ""
   type    = "TXT"
   ttl     = "3600"
   records = [
@@ -22,7 +22,7 @@ resource "aws_route53_record" "gxrneyme_root_txt" {
 # Email routing
 resource "aws_route53_record" "gxrneyme_mx" {
   zone_id = aws_route53_zone.gxrneyme.zone_id
-  name    = "@"
+  name    = ""
   type    = "MX"
   ttl     = "3600"
   records = [
@@ -35,7 +35,7 @@ resource "aws_route53_record" "gxrneyme_mx" {
 # This is set as it is as I don’t send email from this domain.
 resource "aws_route53_record" "gxrneyme_spf" {
   zone_id = aws_route53_zone.gxrneyme.zone_id
-  name    = "@"
+  name    = ""
   type    = "TXT"
   ttl     = "3600"
   records = [
