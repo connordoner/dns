@@ -14,6 +14,10 @@ resource "aws_route53_record" "gxrneyme_root_txt" {
   type    = "TXT"
   ttl     = "3600"
   records = [
+    # Email SPF
+    # This is set as it is as I don’t send email from this domain.
+    "v=spf1 -all",
+
     # Apple domain verification
     "apple-domain=2SFecY4bMX7IXcpI"
   ]
@@ -28,18 +32,6 @@ resource "aws_route53_record" "gxrneyme_mx" {
   records = [
     "10 mx01.mail.icloud.com",
     "10 mx02.mail.icloud.com"
-  ]
-}
-
-# Email SPF
-# This is set as it is as I don’t send email from this domain.
-resource "aws_route53_record" "gxrneyme_spf" {
-  zone_id = aws_route53_zone.gxrneyme.zone_id
-  name    = ""
-  type    = "TXT"
-  ttl     = "3600"
-  records = [
-    "v=spf1 -all"
   ]
 }
 
