@@ -10,7 +10,7 @@ You’re also more than welcome to [contribute](#contributing) if you’d like, 
 
 ## Deployment
 
-Changes are deployed to AWS Route 53 automatically when changes are pushed to the `main` branch using a [GitHub Actions workflow](./.github/workflows/deploy.yml).
+Changes are deployed to AWS Route 53 automatically when they’re pushed to the `main` branch using a [GitHub Actions workflow](./.github/workflows/deploy.yml).
 
 As long as you’re [logged in to Terraform Cloud](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login) locally, you can also deploy manually by running the following command:
 
