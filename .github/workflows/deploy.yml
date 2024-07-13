@@ -1,0 +1,41 @@
+name: Deploy
+env:
+  TF_CLOUD_ORGANIZATION: connorgurney
+  TF_WORKSPACE: dns
+  TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout zone configuration from GitHub
+        id: checkout-config
+        uses: actions/checkout@v4
+        with:
+          path: dns
+          sparse-checkout: |
+            src/zones/
+      - name: Upload zone configuration to Terraform Cloud
+        id: upload-config
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ./src/zones/
+      - name: Create Terraform run
+        id: create-run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload-config.outputs.configuration_version_id }}
+      - name: Apply Terraform run
+        id: apply-run
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
+        if: fromJSON(steps.create-run.outputs.payload).data.attributes.actions.IsConfirmable
+        with:
+          run: ${{ steps.create-run.outputs.run_id }}
