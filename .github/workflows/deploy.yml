@@ -20,13 +20,13 @@ jobs:
         with:
           path: dns
           sparse-checkout: |
-            src/zones/
+            src/
       - name: Upload zone configuration to Terraform Cloud
         id: upload-config
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         with:
           workspace: ${{ env.TF_WORKSPACE }}
-          directory: ./dns/src/zones
+          directory: ./dns/
       - name: Create Terraform run
         id: create-run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
