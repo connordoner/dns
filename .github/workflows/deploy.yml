@@ -26,7 +26,7 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         with:
           workspace: ${{ env.TF_WORKSPACE }}
-          directory: ./src/zones/
+          directory: ./dns/src/zones
       - name: Create Terraform run
         id: create-run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
