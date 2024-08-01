@@ -53,7 +53,7 @@ resource "aws_route53_record" "cgmeuk_root" {
 resource "aws_route53_record" "cgmeuk_www" {
   zone_id = aws_route53_zone.cgmeuk.zone_id
   name    = "www"
-  type    = "CNAME"
+  type    = "A"
   ttl     = "3600"
   records = [
     local.cgmeuk_cdn_hostname
