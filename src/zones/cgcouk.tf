@@ -19,7 +19,10 @@ resource "aws_route53_record" "cgcouk_root_txt" {
     "v=spf1 -all",
 
     # Apple domain verification
-    "apple-domain=bx7QcUxkocqL0mX0"
+    "apple-domain=bx7QcUxkocqL0mX0",
+
+    # Google Site Verification
+    "google-site-verification=M4s9X3fBuZkq82Jbujgi97mKP0E48WitJHhZek7jjXk"
   ]
 }
 

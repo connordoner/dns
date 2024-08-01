@@ -19,7 +19,10 @@ resource "aws_route53_record" "travelbetterwithbb_root_txt" {
     "v=spf1 -all",
 
     # Apple domain verification
-    "apple-domain=18kCqeCndYjeoxOZ"
+    "apple-domain=18kCqeCndYjeoxOZ",
+
+    # Google Site Verification
+    "google-site-verification=WVkonleMWebhj12Zc201SkbiHHz_hueO0lXwA3puT80"
   ]
 }
 

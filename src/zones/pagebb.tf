@@ -19,7 +19,10 @@ resource "aws_route53_record" "pagebb_root_txt" {
     "v=spf1 -all",
 
     # Apple domain verification
-    "apple-domain=18kCqeCndYjeoxOZ"
+    "apple-domain=18kCqeCndYjeoxOZ",
+
+    # Google Site Verification
+    "google-site-verification=fZ-3Ox9WJkUl9tD4t1h9AeLuUfhcnD7rsdxSKkfal4g"
   ]
 }
 

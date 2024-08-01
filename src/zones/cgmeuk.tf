@@ -25,7 +25,10 @@ resource "aws_route53_record" "cgmeuk_root_txt" {
     "v=spf1 include:icloud.com -all",
 
     # Apple domain verification
-    "apple-domain=bspmYxr24yNNDCpD"
+    "apple-domain=bspmYxr24yNNDCpD",
+
+    # Google Site Verification
+    "google-site-verification=enhNY1VAXCqQ5qPgLsAWfaLjoUjSeVB_sk3UifO5E00"
   ]
 }
 

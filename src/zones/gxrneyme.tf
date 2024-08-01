@@ -19,7 +19,10 @@ resource "aws_route53_record" "gxrneyme_root_txt" {
     "v=spf1 -all",
 
     # Apple domain verification
-    "apple-domain=2SFecY4bMX7IXcpI"
+    "apple-domain=2SFecY4bMX7IXcpI",
+
+    # Google Site Verification
+    "google-site-verification=CExsGWm54jXozRmZhIGjoS014j1M4fP9eUmOZSQohEI"
   ]
 }
 
