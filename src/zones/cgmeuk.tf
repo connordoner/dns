@@ -26,10 +26,10 @@ resource "aws_route53_record" "cgmeuk_root_txt" {
 resource "aws_route53_record" "cgmeuk_root" {
   zone_id = aws_route53_zone.cgmeuk.zone_id
   name    = ""
-  type    = "CNAME"
+  type    = "ALIAS"
   ttl     = "3600"
   records = [
-    "d36bj2gmhc6qn1.cloudfront.net"
+    "www.connorgurney.me.uk."
   ]
 }
 
