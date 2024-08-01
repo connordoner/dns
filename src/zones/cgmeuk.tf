@@ -54,10 +54,16 @@ resource "aws_route53_record" "cgmeuk_www" {
   zone_id = aws_route53_zone.cgmeuk.zone_id
   name    = "www"
   type    = "A"
-  ttl     = "3600"
-  records = [
-    local.cgmeuk_cdn_hostname
-  ]
+  
+  alias {
+    # This indicates that the alias is to Amazon CloudFront
+    # See: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-aliastarget.html
+    zone_id = "Z2FDTNDATAQYW2"
+    
+    name = local.cgmeuk_cdn_hostname
+
+    evaluate_target_health = false
+  }
 }
 
 # Email routing
