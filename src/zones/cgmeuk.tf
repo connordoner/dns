@@ -31,7 +31,7 @@ resource "aws_route53_record" "cgmeuk_root" {
   alias {
     zone_id = aws_route53_zone.cgmeuk.id
     
-    name = "www.connorgurney.me.uk"
+    name = "www.connorgurney.me.uk."
 
     evaluate_target_health = false
   }
