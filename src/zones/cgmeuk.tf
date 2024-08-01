@@ -27,6 +27,7 @@ resource "aws_route53_record" "cgmeuk_root" {
   zone_id = aws_route53_zone.cgmeuk.zone_id
   name    = ""
   type    = "A"
+  records = []
   ttl     = "3600"
   
   alias {
