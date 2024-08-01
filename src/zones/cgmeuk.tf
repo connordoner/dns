@@ -26,7 +26,7 @@ resource "aws_route53_record" "cgmeuk_root_txt" {
 resource "aws_route53_record" "cgmeuk_root" {
   zone_id = aws_route53_zone.cgmeuk.zone_id
   name    = ""
-  type    = "A"
+  type    = "CNAME"
   
   alias {
     zone_id = aws_route53_zone.cgmeuk.id
