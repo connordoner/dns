@@ -1,3 +1,10 @@
+# Local variables
+locals {
+  # Hostname for CDN distribution
+  # TODO: Import this from the repository for my personal website
+  cgmeuk_cdn_hostname = "d36bj2gmhc6qn1.cloudfront.net"
+}
+
 # DNS zone itself
 resource "aws_route53_zone" "cgmeuk" {
   name = "connorgurney.me.uk"
@@ -29,9 +36,11 @@ resource "aws_route53_record" "cgmeuk_root" {
   type    = "A"
   
   alias {
+    # This indicates that the alias is to Amazon CloudFront
+    # See: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-aliastarget.html
     zone_id = "Z2FDTNDATAQYW2"
     
-    name = "d36bj2gmhc6qn1.cloudfront.net"
+    name = locals.cgmeuk_cdn_hostname
 
     evaluate_target_health = false
   }
@@ -44,7 +53,7 @@ resource "aws_route53_record" "cgmeuk_www" {
   type    = "CNAME"
   ttl     = "3600"
   records = [
-    "d36bj2gmhc6qn1.cloudfront.net"
+    locals.cgmeuk_cdn_hostname
   ]
 }
 
