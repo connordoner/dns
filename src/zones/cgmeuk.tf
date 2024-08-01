@@ -43,7 +43,7 @@ resource "aws_route53_record" "cgmeuk_root" {
     # See: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset-aliastarget.html
     zone_id = "Z2FDTNDATAQYW2"
     
-    name = locals.cgmeuk_cdn_hostname
+    name = local.cgmeuk_cdn_hostname
 
     evaluate_target_health = false
   }
@@ -56,7 +56,7 @@ resource "aws_route53_record" "cgmeuk_www" {
   type    = "CNAME"
   ttl     = "3600"
   records = [
-    locals.cgmeuk_cdn_hostname
+    local.cgmeuk_cdn_hostname
   ]
 }
 
