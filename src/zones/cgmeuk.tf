@@ -29,9 +29,9 @@ resource "aws_route53_record" "cgmeuk_root" {
   type    = "A"
   
   alias {
-    zone_id = aws_route53_zone.cgmeuk.id
+    zone_id = "Z2FDTNDATAQYW2"
     
-    name = "d36bj2gmhc6qn1.cloudfront.net"
+    name = aws_route53_record.cgcouk_www.records[0]
 
     evaluate_target_health = false
   }
