@@ -14,7 +14,7 @@ resource "aws_route53_record" "pagebb_root_txt" {
   type    = "TXT"
   ttl     = "3600"
   records = [
-    # Email SPF
+    # Inbound email SPF
     # This is set as it is as I don’t send email from this domain.
     "v=spf1 -all",
 
@@ -27,7 +27,7 @@ resource "aws_route53_record" "pagebb_root_txt" {
 }
 
 # Email routing
-resource "aws_route53_record" "pagebb_mx" {
+resource "aws_route53_record" "pagebb_inbound_mx" {
   zone_id = aws_route53_zone.pagebb.zone_id
   name    = ""
   type    = "MX"
@@ -38,8 +38,29 @@ resource "aws_route53_record" "pagebb_mx" {
   ]
 }
 
+resource "aws_route53_record" "pagebb_outbound_mx" {
+  zone_id = aws_route53_zone.pagebb.zone_id
+  name    = "outbound"
+  type    = "MX"
+  ttl     = "3600"
+  records = [
+    "10 feedback-smtp.eu-west-2.amazonses.com"
+  ]
+}
+
+# Outbound enail SPF
+resource "aws_route53_record" "pagebb_outbound_spf" {
+  zone_id = aws_route53_zone.pagebb.zone_id
+  name    = "outbound"
+  type    = "TXT"
+  ttl     = "3600"
+  records = [
+    "v=spf1 include:amazonses.com -all"
+  ]
+}
+
 # Email DMARC
-# This is set as it is as I don’t send email from this domain.
+# This is set as it is as I only send email.
 resource "aws_route53_record" "pagebb_dmarc" {
   zone_id = aws_route53_zone.pagebb.zone_id
   name    = "_dmarc"
@@ -51,12 +72,32 @@ resource "aws_route53_record" "pagebb_dmarc" {
 }
 
 # Email DKIM
-resource "aws_route53_record" "pagebb_dkim" {
+resource "aws_route53_record" "pagebb_dkim_1" {
   zone_id = aws_route53_zone.pagebb.zone_id
-  name    = "*._domainkey"
-  type    = "TXT"
+  name    = "jipoybwnp67evqmblxput5acfnrb6w3i._domainkey"
+  type    = "CNAME"
   ttl     = "3600"
   records = [
-    "v=DKIM1; p="
+    "jipoybwnp67evqmblxput5acfnrb6w3i.dkim.amazonses.com"
+  ]
+}
+
+resource "aws_route53_record" "pagebb_dkim_2" {
+  zone_id = aws_route53_zone.pagebb.zone_id
+  name    = "cdyrulfd7fvknppkthe3l2zwejsjyeg4._domainkey"
+  type    = "CNAME"
+  ttl     = "3600"
+  records = [
+    "cdyrulfd7fvknppkthe3l2zwejsjyeg4.dkim.amazonses.com"
+  ]
+}
+
+resource "aws_route53_record" "pagebb_dkim_3" {
+  zone_id = aws_route53_zone.pagebb.zone_id
+  name    = "bxwzkebpb7s45rcbinnwjyw5mjo6enul._domainkey"
+  type    = "CNAME"
+  ttl     = "3600"
+  records = [
+    "bxwzkebpb7s45rcbinnwjyw5mjo6enul.dkim.amazonses.com"
   ]
 }
